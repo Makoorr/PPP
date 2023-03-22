@@ -77,5 +77,6 @@ function createTables() {
 }
 
 module.exports = {
+  connection,
   createTables: createTables
 };
