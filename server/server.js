@@ -2,8 +2,8 @@ const express = require('express')
 const app = express()
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const tasksRouter = require('./routes/tasks');
+const usersRouter = require('./routes/user');
+const tasksRouter = require('./routes/task');
 
 app.listen(5000, () => {
     console.log("Server started on port 5000")
