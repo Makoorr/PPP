@@ -76,7 +76,4 @@ function createTables() {
     });
 }
 
-module.exports = {
-  connection,
-  createTables: createTables
-};
+module.exports = connection;
