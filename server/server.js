@@ -1,16 +1,13 @@
 const express = require('express')
 const app = express()
 
-const usersRouter = require('./routers/user');
-const tasksRouter = require('./routers/task');
-const projectsRouter = require('./routers/project');
-const sectionsRouter = require('./routers/section');
+// parse requests of content-type - application/json
+app.use(express.json());
 
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+require("./routers/users.js")(app);
 app.listen(5000, () => {
     console.log("Server started on port 5000")
 });
-
-app.use('/user', usersRouter);
-app.use('/task', tasksRouter);
-app.use('/project', projectsRouter);
-app.use('/section', sectionsRouter);
