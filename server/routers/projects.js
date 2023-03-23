@@ -4,7 +4,7 @@ const router = express.Router();
 const connection = require("../db/database")
 
 router.get('/', function (req, res, next) {
-    connection.query('SELECT * FROM section', function (err, rows) {
+    connection.query('SELECT * FROM projects', function (err, rows) {
       if (err) {
         req.flash('error', err)
         res.render('profile', { data: '' })
