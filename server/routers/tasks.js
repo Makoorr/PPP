@@ -1,17 +1,25 @@
-const express = require('express');
-const router = express.Router();
+module.exports = app => {
+  const tasks = require("../controllers/task.controller");
 
-const connection = require("../db/database")
+  var router = require("express").Router();
 
-router.get('/', function (req, res, next) {
-    connection.query('SELECT * FROM tasks', function (err, rows) {
-      if (err) {
-        req.flash('error', err)
-        res.render('profile', { data: '' })
-      } else {
-        res.render('profile', { data: rows })
-      }
-    })
-  })
+  // Create a new task
+  router.post("/", tasks.create);
 
-module.exports = router;
+  // Retrieve all tasks
+  router.get("/", tasks.findAll);
+
+  // Retrieve a single task with id
+  router.get("/:id", tasks.findOne);
+
+  // Update a task with id
+  router.put("/:id", tasks.update);
+
+  // Delete a task with id
+  router.delete("/:id", tasks.delete);
+
+  // Delete all tasks
+  router.delete("/", tasks.deleteAll);
+
+  app.use('/task/', router);
+};

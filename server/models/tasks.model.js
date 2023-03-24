@@ -7,7 +7,7 @@ const Task = function(Task) {
     this.priority = Task.priority;
     this.deadline = Task.deadline;
   };
-  
+
   Task.create = (newTask, result) => {
     connection.query("INSERT INTO tasks SET ?", newTask, (err, res) => {
       if (err) {
@@ -39,14 +39,14 @@ const Task = function(Task) {
       result({ kind: "not_found" }, null);
     });
   };
-  
-  Task.getAll = (title, result) => {
+
+  Task.getAll = (name, result) => {
     let query = "SELECT * FROM tasks";
   
-    if (title) {
-      query += ` WHERE title LIKE '%${title}%'`;
+    if (name) {
+      query += ` WHERE name LIKE '%${name}%'`;
     }
-  
+
     connection.query(query, (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -58,24 +58,22 @@ const Task = function(Task) {
       result(null, res);
     });
   };
-  
-  Task.getAllPublished = result => {
-    connection.query("SELECT * FROM tasks WHERE published=true", (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(null, err);
-        return;
-      }
-  
-      console.log("Tasks: ", res);
-      result(null, res);
-    });
-  };
-  
+
   Task.updateById = (id, Task, result) => {
-    connection.query(
-      "UPDATE tasks SET title = ?, description = ?, published = ? WHERE id = ?",
-      [Task.title, Task.description, Task.published, id],
+    if (Task.name || Task.description || Task.priority || Task.deadline){
+      query = "UPDATE tasks SET";
+        if (Task.name)
+          query += " name = ?"
+        if (Task.description)
+          query += ", description = ?"
+        if (Task.priority)
+          query += " priority = ?"
+        if (Task.deadline)
+          query += ", deadline = ?"
+      query += " WHERE id = ?";
+    }
+    connection.query(query,
+      [Task.name, Task.description, Task.priority, Task.deadline, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);
@@ -122,7 +120,7 @@ const Task = function(Task) {
         return;
       }
   
-      console.log(`deleted ${res.affectedRows} tasks`);
+      console.log(`deleted ${res.affectedRows} Tasks`);
       result(null, res);
     });
   };

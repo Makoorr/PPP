@@ -11,7 +11,7 @@ exports.create = (req, res) => {
 
   // Create a User
   const user = new User({
-    name: req.body.name,
+    username: req.body.username,
     password: req.body.password
   });
 
@@ -28,9 +28,9 @@ exports.create = (req, res) => {
 
 // Retrieve all Users from the database (with condition).
 exports.findAll = (req, res) => {
-    const name = req.query.name;
+    const username = req.query.username;
 
-    User.getAll(name, (err, data) => {
+    User.getAll(username, (err, data) => {
       if (err)
         res.status(500).send({
           message:
@@ -75,7 +75,7 @@ exports.update = (req, res) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
-            message: `Not found User with id ${req.params.id}.`
+            message: `Error updating User with the id ${req.params.id}.`
           });
         } else {
           res.status(500).send({

@@ -2,21 +2,23 @@ const connection = require("../db/database");
 
 // constructor
 const User = function(User) {
-    this.name = User.name;
+    this.username = User.username;
     this.password = User.password;
   };
   
   User.create = (newUser, result) => {
-    connection.query("INSERT INTO users SET ?", newUser, (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(err, null);
-        return;
-      }
-  
-      console.log("created User: ", { id: res.insertId, ...newUser });
-      result(null, { id: res.insertId, ...newUser });
-    });
+    if (newUser.username && newUser.password){
+      connection.query("INSERT INTO users SET ?", newUser, (err, res) => {
+        if (err) {
+          console.log("error: ", err);
+          result(err, null);
+          return;
+        }
+    
+        console.log("created User: ", { id: res.insertId, ...newUser });
+        result(null, { id: res.insertId, ...newUser });
+      });
+    }
   };
   
   User.findById = (id, result) => {
@@ -58,8 +60,16 @@ const User = function(User) {
   };
 
   User.updateById = (id, User, result) => {
-    connection.query("UPDATE users SET name = ?, password = ? WHERE id = ?",
-      [User.title, User.description, User.published, id],
+    if (User.username || User.password){
+      query = "UPDATE users SET";
+        if (User.username)
+          query += " username = ?"
+        if (User.password)
+          query += ", password = ?"
+      query += " WHERE id = ?";
+    }
+    connection.query(query,
+      [User.username, User.password, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);

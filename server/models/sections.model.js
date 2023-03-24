@@ -57,23 +57,17 @@ const Section = function(Section) {
     });
   };
   
-  Section.getAllPublished = result => {
-    connection.query("SELECT * FROM sections WHERE published=true", (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(null, err);
-        return;
-      }
-  
-      console.log("Sections: ", res);
-      result(null, res);
-    });
-  };
-  
   Section.updateById = (id, Section, result) => {
-    connection.query(
-      "UPDATE sections SET title = ?, description = ?, published = ? WHERE id = ?",
-      [Section.title, Section.description, Section.published, id],
+    if (Section.name || Section.description){
+      query = "UPDATE sections SET";
+        if (Section.name)
+          query += " name = ?"
+        if (Section.description)
+          query += ", description = ?"
+      query += " WHERE id = ?";
+    }
+    connection.query(query,
+      [Section.name, Section.description, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);

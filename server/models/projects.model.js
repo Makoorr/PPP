@@ -56,24 +56,18 @@ const Project = function(Project) {
       result(null, res);
     });
   };
-  
-  Project.getAllPublished = result => {
-    connection.query("SELECT * FROM projects WHERE published=true", (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(null, err);
-        return;
-      }
-  
-      console.log("Projects: ", res);
-      result(null, res);
-    });
-  };
-  
+
   Project.updateById = (id, Project, result) => {
-    connection.query(
-      "UPDATE projects SET title = ?, description = ?, published = ? WHERE id = ?",
-      [Project.title, Project.description, Project.published, id],
+    if (Project.name || Project.description){
+      query = "UPDATE projects SET";
+        if (Project.name)
+          query += " name = ?"
+        if (Project.description)
+          query += ", description = ?"
+      query += " WHERE id = ?";
+    }
+    connection.query(query,
+      [Project.name, Project.description, id],
       (err, res) => {
         if (err) {
           console.log("error: ", err);
