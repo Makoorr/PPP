@@ -7,15 +7,16 @@ export class UserController {
     private userRepository = AppDataSource.getRepository(User)
 
     async all(request: Request, response: Response, next: NextFunction) {
-        return this.userRepository.find()
+        const users = await AppDataSource.manager.find(User, {
+            relations: ['projects', 'projects.sections', 'projects.sections.tasks'],
+          });
+        return users;
     }
 
     async one(request: Request, response: Response, next: NextFunction) {
         const id = parseInt(request.params.id)
         
-        const user = await this.userRepository.findOne({
-            where: { id }
-        })
+        const user = await AppDataSource.manager.find(User, {where: {id}, relations: ['projects', 'projects.sections', 'projects.sections.tasks']});
 
         if (!user) {
             return "unregistered user"
