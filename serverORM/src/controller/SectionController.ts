@@ -7,15 +7,42 @@ export class SectionController {
     private projectRepository = AppDataSource.getRepository(Section)
 
     async all(request: Request, response: Response, next: NextFunction) {
-        return this.projectRepository.find()
+        const sections = await AppDataSource.manager
+            .createQueryBuilder(Section, 'section')
+            .leftJoinAndSelect('section.project', 'project')
+            .leftJoinAndSelect('project.user', 'user')
+            .select([
+            'section.id',
+            'section.name',
+            'section.description',
+            'project.id',
+            'project.name',
+            'project.description',
+            'user.id',
+            'user.name',
+            ])
+            .getMany();
+        return sections;
     }
 
     async one(request: Request, response: Response, next: NextFunction) {
         const id = parseInt(request.params.id)
-        
-        const section = await this.projectRepository.findOne({
-            where: { id }
-        })
+        const section = await AppDataSource.manager
+        .createQueryBuilder(Section, 'section')
+        .leftJoinAndSelect('section.project', 'project')
+        .leftJoinAndSelect('project.user', 'user')
+        .select([
+        'section.id',
+        'section.name',
+        'section.description',
+        'project.id',
+        'project.name',
+        'project.description',
+        'user.id',
+        'user.name',
+        ])
+        .where({id})
+        .getMany();
 
         if (!section) {
             return "unregistered section"

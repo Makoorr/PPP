@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm"
+import { Section } from "./Section"
+import { User } from "./User"
 
 @Entity()
 export class Project {
@@ -14,4 +16,10 @@ export class Project {
 
     @Column({ default: false })
     done: boolean
+
+    @ManyToOne(() => User, (user) => user.projects)
+    user: User
+
+    @OneToMany(() => Section, (section) => section.project)
+    sections: Section[]
 }

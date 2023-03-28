@@ -7,15 +7,22 @@ export class ProjectController {
     private projectRepository = AppDataSource.getRepository(Project)
 
     async all(request: Request, response: Response, next: NextFunction) {
-        return this.projectRepository.find()
+        const projects = await AppDataSource.manager
+            .createQueryBuilder(Project, 'project')
+            .leftJoinAndSelect('project.user', 'user')
+            .select(['project.id', 'project.name', 'project.description', 'user.id', 'user.name'])
+            .getMany();
+        return projects;
     }
 
     async one(request: Request, response: Response, next: NextFunction) {
         const id = parseInt(request.params.id)
-        
-        const project = await this.projectRepository.findOne({
-            where: { id }
-        })
+        const project = await AppDataSource.manager
+            .createQueryBuilder(Project, 'project')
+            .leftJoinAndSelect('project.user', 'user')
+            .select(['project.id', 'project.name', 'project.description', 'user.id', 'user.name'])
+            .where({id})
+            .getMany();
 
         if (!project) {
             return "unregistered project"

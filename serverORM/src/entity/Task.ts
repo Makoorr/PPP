@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
+import { Section } from "./Section"
 
 @Entity()
 export class Task {
@@ -20,4 +21,7 @@ export class Task {
 
     @Column({ default: false })
     done: boolean
+    
+    @ManyToOne(() => Section, (section) => section.tasks)
+    section: Section
 }

@@ -7,15 +7,55 @@ export class TaskController {
     private taskRepository = AppDataSource.getRepository(Task)
 
     async all(request: Request, response: Response, next: NextFunction) {
-        return this.taskRepository.find()
+        const tasks = await AppDataSource.manager
+            .createQueryBuilder(Task, 'task')
+            .leftJoinAndSelect('task.section', 'section')
+            .leftJoinAndSelect('section.project', 'project')
+            .leftJoinAndSelect('project.user', 'user')
+            .select([
+            'task.id',
+            'task.name',
+            'task.description',
+            'task.priority',
+            'task.deadline',
+            'section.id',
+            'section.name',
+            'section.description',
+            'project.id',
+            'project.name',
+            'project.description',
+            'user.id',
+            'user.name',
+            ])
+            .getMany();
+        return tasks;
     }
 
     async one(request: Request, response: Response, next: NextFunction) {
         const id = parseInt(request.params.id)
         
-        const task = await this.taskRepository.findOne({
-            where: { id }
-        })
+        const task = await AppDataSource.manager
+            .createQueryBuilder(Task, 'task')
+            .leftJoinAndSelect('task.section', 'section')
+            .leftJoinAndSelect('section.project', 'project')
+            .leftJoinAndSelect('project.user', 'user')
+            .select([
+            'task.id',
+            'task.name',
+            'task.description',
+            'task.priority',
+            'task.deadline',
+            'section.id',
+            'section.name',
+            'section.description',
+            'project.id',
+            'project.name',
+            'project.description',
+            'user.id',
+            'user.name',
+            ])
+            .where({id})
+            .getMany();
 
         if (!task) {
             return "unregistered task"
