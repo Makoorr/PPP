@@ -1,5 +1,5 @@
 .git
 
-/server/node_modules
+/serverORM/node_modules
 /client/node_modules
 
