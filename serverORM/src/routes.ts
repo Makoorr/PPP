@@ -20,6 +20,11 @@ export const Routes = [
     controller: UserController,
     action: "save"
 }, {
+    method: "put",
+    route: "/user/:id",
+    controller: UserController,
+    action: "update"
+}, {
     method: "delete",
     route: "/user/:id",
     controller: UserController,
@@ -85,6 +90,11 @@ export const Routes = [
     route: "/task",
     controller: TaskController,
     action: "save"
+}, {
+    method: "put",
+    route: "/task/:id",
+    controller: TaskController,
+    action: "update"
 }, {
     method: "delete",
     route: "/task/:id",

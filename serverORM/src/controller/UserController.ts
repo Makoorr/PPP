@@ -36,7 +36,28 @@ export class UserController {
         return this.userRepository.save(user)
     }
 
-    
+    async update(request: Request, response: Response, next: NextFunction) {
+        const id = parseInt(request.params.id)
+        const { login, password, name } = request.body;
+
+        try {
+            const user = await this.userRepository.findOneBy({ id });
+
+            if (!user) {
+                return "User not found"
+            }
+
+            user.login = login || user.login;
+            user.password = password || user.password;
+            user.name = name || user.name;
+
+            await this.userRepository.save(user);
+            
+            return "User " + id + " has been updated. login: " + user.login + " | name: " + user.name + " | password: " + user.password
+        } catch (err) {
+          return "Error: " + err.message
+        }
+    }
 
     async remove(request: Request, response: Response, next: NextFunction) {
         const id = parseInt(request.params.id)
