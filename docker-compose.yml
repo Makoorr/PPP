@@ -5,12 +5,18 @@ services:
     build: ./db/
     restart: always
     ports:
-      - 3306:3306
+      - "3306"
 
   app:
     depends_on:
       - mysqldb
     build: ./server/
     restart: always
+    environment:
+      - MYSQLDB_HOST=mysqldb
+      - MYSQLDB_USER=root
+      - PASSWORD=
+      - MYSQLDB_DATABASE=ppp
+      - MYSQLDB_PORT=3306
     ports:
       - 5000:5000
