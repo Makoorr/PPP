@@ -33,17 +33,18 @@ export default function Register (props: RegisterProps) {
   return (
     <div>
       <Card bgColor="#ff4747" color="#fff">
-        <h3>Register</h3>
+        <h3>Registration</h3>
 
-        <form onSubmit={handleSubmit} className="form">
-          <h5>Login: </h5>
-          <input name="login" type="text" />
-          <h5>Username: </h5>
-          <input name="username" type="text" />
-          <h5>Password: </h5>
-          <input name="password" type="password" />
-          <Button>Register</Button>
-          <Button type="submit" >Login</Button>
+        <form onSubmit={handleSubmit}>
+          <div className="form">
+            <h5>Login: </h5>
+            <input name="login" type="text" />
+            <h5>Username: </h5>
+            <input name="username" type="text" />
+            <h5>Password: </h5>
+            <input name="password" type="password" />
+          </div>
+          <Button type="submit" >Sign up</Button>
         </form>
       </Card>
     </div>

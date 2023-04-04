@@ -6,7 +6,7 @@ export const NavbarContainer = styled.nav`
   align-items: center;
   padding: 1em 10em;
   height: 4em;
-  background-color: #f2f2f2;
+  background-color: #f2f2f250;
 `;
 
 export const Logo = styled.img`

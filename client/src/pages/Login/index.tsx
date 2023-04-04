@@ -35,13 +35,14 @@ export default function Login (props: LoginProps) {
       <Card bgColor="#ff4747" color="#fff">
         <h3>Login</h3>
 
-        <form onSubmit={handleSubmit} className="form">
-          <h5>Username: </h5>
-          <input name="username" type="text" />
-          <h5>Password: </h5>
-          <input name="password" type="password" />
-          <Button>Register</Button>
-          <Button type="submit" >Login</Button>
+        <form onSubmit={handleSubmit}>
+          <div className="form">
+            <h5>Username: </h5>
+            <input name="username" type="text" />
+            <h5>Password: </h5>
+            <input name="password" type="password" />
+          </div>
+          <Button type="submit" >Sign in</Button>
         </form>
       </Card>
     </div>

@@ -1,17 +1,21 @@
 .form {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1em 0.3em;
+  display: grid;
+  grid-template-columns: 0.5fr 2fr;
+  gap: 0em 0.3em;
+  width: 100%;
+  margin-bottom: 1em;
 }
 input{
-    transition: 0.5s ease-in-out;
-    background-color: transparent;
-    border: white 2px solid;
-    border-radius: 50px;
-    width: max-content;
-    color: white;
-  }
-  input:focus{
-    transform: scale(1.1);
-    outline: none;
-  }
+  transition: 0.5s ease-in-out;
+  background-color: transparent;
+  border: white 2px solid;
+  border-radius: 50px;
+  width: 100%;
+  margin: auto;
+  height: 2em;
+  color: white;
+}
+input:focus{
+  transform: scale(1.1);
+  outline: none;
+}
