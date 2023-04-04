@@ -1,0 +1,17 @@
+.form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em 0.3em;
+}
+input{
+    transition: 0.5s ease-in-out;
+    background-color: transparent;
+    border: white 2px solid;
+    border-radius: 50px;
+    width: max-content;
+    color: white;
+  }
+  input:focus{
+    transform: scale(1.1);
+    outline: none;
+  }
