@@ -21,7 +21,6 @@ export const ButtonWrapper = styled.div<{ bgColor1?: string, bgColor2?: string, 
             background: linear-gradient(
                 ${(props) => props.bgColor1 || "red"}, ${(props) => props.bgColor2 || "brown"} 90%
             );
-            transform: scale(1.05);
         }
     }
 `;
