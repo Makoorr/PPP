@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Card from '../../components/Card';
 import Button from '../../components/Button';
 import './style.css'
-import Navbar from '../../components/Navbar';
 
 interface RegisterProps {}
 

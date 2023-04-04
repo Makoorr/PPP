@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Card from '../../components/Card';
 import './style.css'
 import Button from '../../components/Button';
-import Navbar from '../../components/Navbar';
 
 interface LoginProps {}
 
