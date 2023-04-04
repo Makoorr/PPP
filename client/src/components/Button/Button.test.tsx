@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Login from './Login';
+import Button from '.';
 
 it('It should mount', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Login />, div);
+  ReactDOM.render(<Button />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

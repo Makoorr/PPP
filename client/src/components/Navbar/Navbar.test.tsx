@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Tasks from './Tasks';
+import Navbar from '.';
 
 it('It should mount', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Tasks />, div);
+  ReactDOM.render(<Navbar />, div);
   ReactDOM.unmountComponentAtNode(div);
 });

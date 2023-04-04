@@ -1,11 +1,11 @@
 /* eslint-disable */
-import Main from './Main';
+import Card from '.';
 
 export default {
-  title: "Main",
+  title: "Card",
 };
 
-export const Default = () => <Main />;
+export const Default = () => <Card />;
 
 Default.story = {
   name: 'default',
