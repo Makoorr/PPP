@@ -1,32 +1,43 @@
 import * as React from "react";
+import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation, Navigate, Outlet } from 'react-router-dom';
 import { fakeAuthProvider } from "./auth";
-import Main from './components/Main/Main';
-import Login from "./components/Login/Login";
-import Register from "./components/Register/Register";
-import Tasks from "./components/Tasks/Tasks";
+import Main from './pages/Main';
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Tasks from "./pages/Tasks";
+import Navbar from "./components/Navbar";
 
 export default function App() {
   return (
     <AuthProvider>
-      <h1>Auth Example</h1>
-
       <Routes>
-        <Route>
-          <Route path="/" element={<Main />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route
-            path="/tasks"
-            element={
-              <RequireAuth>
-                <Tasks />
-              </RequireAuth>
-            }
-          />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Main />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
         </Route>
+        <Route
+          path="/tasks"
+          element={
+            <RequireAuth>
+              <Tasks />
+            </RequireAuth>
+          }
+        />
       </Routes>
     </AuthProvider>
+  );
+}
+
+function Layout(){
+  return (
+  <div>
+    <div style={{marginBottom: "1em"}}>
+      <Navbar />
+    </div>
+    <Outlet />
+  </div>
   );
 }
 
