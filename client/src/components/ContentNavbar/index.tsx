@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ContentNavbarWrapper } from './ContentNavbar.styled';
+import { ContentNavbarContainer, ContentNavbarHeader, ContentNavbarWrapper } from './ContentNavbar.styled';
 
 interface ContentNavbarProps {
    header?: React.ReactNode;
@@ -8,13 +8,13 @@ interface ContentNavbarProps {
 
 const ContentNavbar: FC<ContentNavbarProps> = ({ children, header }) => (
  <ContentNavbarWrapper>
-   <div>
+   <ContentNavbarHeader>
       {header}
-   </div>
+   </ContentNavbarHeader>
    <hr style={{ marginTop: 0 }}></hr>
-   <div>
+   <ContentNavbarContainer>
       {children}
-   </div>
+   </ContentNavbarContainer>
  </ContentNavbarWrapper>
 );
 
