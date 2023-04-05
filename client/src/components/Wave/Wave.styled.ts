@@ -5,7 +5,6 @@ export const WaveWrapper = styled.div`
     text-align:center;
     background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
     color:white;
-    margin-bottom: 1em;
 `;
 
 export const Header = styled.div`
