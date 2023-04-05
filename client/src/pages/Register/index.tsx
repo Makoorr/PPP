@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Card from '../../components/Card';
 import Button from '../../components/Button';
 import './style.css'
+import Navbar from '../../components/Navbar';
 
 interface RegisterProps {}
 
@@ -32,7 +33,9 @@ export default function Register (props: RegisterProps) {
 
   return (
     <div>
-      <Card bgColor="#ff4747" color="#fff">
+      <Navbar background="True" />
+      
+      <Card bgColor="#3465bc" color="#fff">
         <h3>Registration</h3>
 
         <form onSubmit={handleSubmit}>

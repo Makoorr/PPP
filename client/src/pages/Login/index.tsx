@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Card from '../../components/Card';
 import './style.css'
 import Button from '../../components/Button';
+import Navbar from '../../components/Navbar';
 
 interface LoginProps {}
 
@@ -32,7 +33,8 @@ export default function Login (props: LoginProps) {
 
   return (
     <div>
-      <Card bgColor="#ff4747" color="#fff">
+      <Navbar background="True" />
+      <Card bgColor="#3465bc" color="#fff">
         <h3>Login</h3>
 
         <form onSubmit={handleSubmit}>
@@ -42,7 +44,7 @@ export default function Login (props: LoginProps) {
             <h5>Password: </h5>
             <input name="password" type="password" />
           </div>
-          <Button type="submit" >Sign in</Button>
+          <div className="gridone"><Button type="submit" >Sign in</Button></div>
         </form>
       </Card>
     </div>
