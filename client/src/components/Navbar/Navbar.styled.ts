@@ -5,11 +5,11 @@ export const NavbarContainer = styled.nav<{ background?: string }>`
   justify-content: space-between;
   align-items: center;
   padding: 1em 10em;
-  height: 4em;
+  height: 2em;
   font-family: 'Poppins', sans-serif;
   margin-bottom: 1em;
   ${({ background }) => background && `
-    background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);;
+    background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);
   `}
   & ul {
     display: flex;
