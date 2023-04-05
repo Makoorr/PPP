@@ -10,7 +10,7 @@ export const WaveWrapper = styled.div`
 
 export const Header = styled.div`
     width: 100%;
-    margin: 0;
+    padding: 3em 0 0 0;
     display: grid;
     grid-template-columns: 1.5fr 2fr;
     width: 100%;

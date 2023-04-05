@@ -10,6 +10,29 @@ body {
   background-color: aliceblue;
 }
 
+.form {
+  display: grid;
+  grid-template-columns: 0.5fr 2fr;
+  gap: 0em 1em;
+  margin: 1em;
+}
+
+input{
+  transition: 0.5s ease-in-out;
+  background-color: transparent;
+  border: white 2px solid;
+  border-radius: 50px;
+  width: 100%;
+  margin: auto;
+  height: 2em;
+  color: white;
+}
+
+input:focus{
+  border: darkblue 2px solid;
+  outline: none;
+}
+
 h1 {
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
@@ -21,6 +44,20 @@ h2 {
   font-family: 'Poppins', sans-serif;
   font-weight: 200;
   font-style: italic;
+  font-size: 2rem;
+  margin: 0;
+}
+
+h3 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  font-size: 2rem;
+  /* margin: 0; */
+}
+
+h4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 100;
   font-size: 2rem;
   margin: 0;
 }

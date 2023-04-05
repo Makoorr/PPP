@@ -7,15 +7,16 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Tasks from "./pages/Tasks";
 import Navbar from "./components/Navbar";
+import Wave from "./components/Wave";
 
 export default function App() {
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route element={<Layout />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Main />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
         </Route>
         <Route
           path="/tasks"
@@ -31,9 +32,19 @@ export default function App() {
 }
 
 function Layout(){
+  //Get page name
+  let location = useLocation();
+  let pageName = location.pathname.split("/")[1];
+  if(pageName === ""){
+    pageName = "home";
+  }
+  pageName = pageName.charAt(0).toUpperCase() + pageName.slice(1);
+  pageName = "/"+pageName+".svg";
+
   return (
-  <div>
-    <Navbar background="True">
+  <Wave 
+    nav = { 
+    <Navbar>
       <li>
         <a href="/">Home</a>
       </li>
@@ -44,8 +55,16 @@ function Layout(){
         <a href="/register">Register</a>
       </li>
     </Navbar>
-    <Outlet />
-  </div>
+    }
+    left = {
+      <>
+        <Outlet />
+      </>
+    }
+    right= {
+      <img src={ pageName } width="100%" height="700vh" alt="illustration" />
+    }
+    />
   );
 }
 

@@ -32,41 +32,16 @@ export default function Main({}: MainProps) {
   }
 
   return (
-      <div>
-         <AuthStatus />
-         <Wave 
-            nav = { 
-            <Navbar>
-              <li>
-                <a href="/">Home</a>
-              </li>
-              <li>
-                <a href="/login">Login</a>
-              </li>
-              <li>
-                <a href="/register">Register</a>
-              </li>
-            </Navbar>
-            }
-            left = {
-              <>
-                <h1>Task Management APP</h1>
-                <h2>DevOps PPP Project</h2>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi qui eos a incidunt blanditiis doloribus temporibus neque? Corporis ipsa odit accusantium fugit mollitia porro cupiditate? Deserunt sapiente repudiandae esse aperiam.
-                </p>
-                <div className="gridwrapper">
-                  <div className="gridone"><Button width="auto">Login</Button></div>
-                  <div className="gridtwo"><Button width="auto">Register</Button></div>
-                </div>
-              </>
-            }
-            right= {
-              <img src="/illustration.svg" height="90%" alt="illustration" />
-            }
-            />
-
-         <Outlet />
-      </div>
+    <>
+        <h1>Task Management APP</h1>
+        <h2>DevOps PPP Project</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi qui eos a incidunt blanditiis doloribus temporibus neque? Corporis ipsa odit accusantium fugit mollitia porro cupiditate? Deserunt sapiente repudiandae esse aperiam.
+        </p>
+        <div className="gridwrapper">
+          <div className="gridone"><Button width="auto">Login</Button></div>
+          <div className="gridtwo"><Button width="auto">Register</Button></div>
+        </div>
+    </>
   );
 }

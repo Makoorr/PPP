@@ -1,9 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Card from '../../components/Card';
 import Button from '../../components/Button';
-import './style.css'
-import Navbar from '../../components/Navbar';
+import Card from '../../components/Card';
 
 interface RegisterProps {}
 
@@ -32,22 +30,22 @@ export default function Register (props: RegisterProps) {
   }
 
   return (
-    <div>
-      <Card bgColor="#3465bc" color="#fff">
-        <h3>Registration</h3>
+    <Card>
+      <div style={ { textAlign : 'center' } }>
+        <h1 style={ { margin: '1em' } }>Registration</h1>
 
         <form onSubmit={handleSubmit}>
           <div className="form">
-            <h5>Login: </h5>
+            <h3>Login: </h3>
             <input name="login" type="text" />
-            <h5>Username: </h5>
+            <h3>Username: </h3>
             <input name="username" type="text" />
-            <h5>Password: </h5>
+            <h3>Password: </h3>
             <input name="password" type="password" />
           </div>
-          <Button type="submit" >Sign up</Button>
+          <div className="gridone"><Button type="submit" >Sign up</Button></div>
         </form>
-      </Card>
-    </div>
+      </div>
+    </Card>
   );
 };
