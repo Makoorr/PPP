@@ -1,24 +1,17 @@
 import React, { FC } from 'react';
-import { Logo, NavbarContainer, NavItem, NavLinks, NavLink } from './Navbar.styled';
+import { Logo, NavbarContainer } from './Navbar.styled';
 
 interface NavbarProps {
+   children: React.ReactNode;
    background?: string;
 }
 
-const Navbar: FC<NavbarProps> = ({ background }) => (
+const Navbar: FC<NavbarProps> = ({ children, background }) => (
    <NavbarContainer background={ background }>
       <Logo src="/vite.svg" alt="Logo" />
-      <NavLinks>
-         <NavItem>
-            <NavLink href="/">Home</NavLink>
-         </NavItem>
-         <NavItem>
-            <NavLink href="/login">Login</NavLink>
-         </NavItem>
-         <NavItem>
-            <NavLink href="/register">Register</NavLink>
-         </NavItem>
-      </NavLinks>
+      <ul>
+         { children }
+      </ul>
   </NavbarContainer>
 );
 

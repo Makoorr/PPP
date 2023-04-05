@@ -34,7 +34,20 @@ export default function Main({}: MainProps) {
   return (
       <div>
          <AuthStatus />
-         <Wave nav ={<Navbar />}
+         <Wave 
+            nav = { 
+            <Navbar>
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a href="/login">Login</a>
+              </li>
+              <li>
+                <a href="/register">Register</a>
+              </li>
+            </Navbar>
+            }
             left = {
               <>
                 <h1>Task Management APP</h1>

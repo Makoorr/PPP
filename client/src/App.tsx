@@ -20,9 +20,9 @@ export default function App() {
         <Route
           path="/tasks"
           element={
-            <RequireAuth>
+            // <RequireAuth>
               <Tasks />
-            </RequireAuth>
+            // </RequireAuth>
           }
         />
       </Routes>
@@ -33,7 +33,17 @@ export default function App() {
 function Layout(){
   return (
   <div>
-    <Navbar background="True" />
+    <Navbar background="True">
+      <li>
+        <a href="/">Home</a>
+      </li>
+      <li>
+        <a href="/login">Login</a>
+      </li>
+      <li>
+        <a href="/register">Register</a>
+      </li>
+    </Navbar>
     <Outlet />
   </div>
   );
