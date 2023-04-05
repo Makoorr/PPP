@@ -7,10 +7,11 @@ interface ButtonProps {
    bgColor2?: string;
    color?: string;
    type?: "submit" | 'button';
+   width?: string;
 }
 
-const Button: FC<ButtonProps> = ({ children, bgColor1, bgColor2, color, type }) => (
- <ButtonWrapper bgColor1={bgColor1} bgColor2={bgColor2}>
+const Button: FC<ButtonProps> = ({ children, bgColor1, bgColor2, color, type, width }) => (
+ <ButtonWrapper bgColor1={bgColor1} bgColor2={bgColor2} width={width}>
       <button color={color} type={type}>
          {children}
       </button>
