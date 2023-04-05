@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
-import './style.css'
 import Navbar from '../../components/Navbar';
+import AddButton from '../../components/AddButton';
+import SideNavbar from '../../components/SideNavbar';
+import ContentNavbar from '../../components/ContentNavbar';
 
 interface TasksProps {}
 
@@ -12,12 +14,21 @@ export default function Tasks({}: TasksProps) {
             <a href="/">Home</a>
             </li>
          </Navbar>
-         <div className="sidenav">
+
+         <SideNavbar>
             <a>Tasks</a>
-         </div>
-         <div className="contentnav">
+         </SideNavbar>
+
+         <ContentNavbar
+            header= {
             <h1 color="#000">Tasks</h1>
-         </div>
+            }>
+            <div>
+               <AddButton svg={<img src="https://img.icons8.com/ios-glyphs/30/null/plus-math.png"/>}>
+                  Add Task
+               </AddButton>
+            </div>
+         </ContentNavbar>
       </div>
    );
 }
