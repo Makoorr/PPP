@@ -3,6 +3,7 @@ import { Link, Outlet, useNavigate } from 'react-router-dom';
 import Wave from '../../components/Wave';
 import Button from '../../components/Button';
 import Navbar from '../../components/Navbar';
+import './style.css'
 
 interface MainProps {}
 
