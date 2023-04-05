@@ -33,7 +33,6 @@ export default function Login (props: LoginProps) {
 
   return (
     <div>
-      <Navbar background="True" />
       <Card bgColor="#3465bc" color="#fff">
         <h3>Login</h3>
 

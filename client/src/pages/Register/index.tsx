@@ -33,8 +33,6 @@ export default function Register (props: RegisterProps) {
 
   return (
     <div>
-      <Navbar background="True" />
-      
       <Card bgColor="#3465bc" color="#fff">
         <h3>Registration</h3>
 

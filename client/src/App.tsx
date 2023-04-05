@@ -6,6 +6,7 @@ import Main from './pages/Main';
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Tasks from "./pages/Tasks";
+import Navbar from "./components/Navbar";
 
 export default function App() {
   return (
@@ -32,6 +33,7 @@ export default function App() {
 function Layout(){
   return (
   <div>
+    <Navbar background="True" />
     <Outlet />
   </div>
   );
