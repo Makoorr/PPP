@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
 import { Logo, NavbarContainer, NavItem, NavLinks, NavLink } from './Navbar.styled';
 
-interface NavbarProps {}
+interface NavbarProps {
+   background?: string;
+}
 
-const Navbar: FC<NavbarProps> = () => (
-   <NavbarContainer>
+const Navbar: FC<NavbarProps> = ({ background }) => (
+   <NavbarContainer background={ background }>
       <Logo src="/vite.svg" alt="Logo" />
       <NavLinks>
          <NavItem>

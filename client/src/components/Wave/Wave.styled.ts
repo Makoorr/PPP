@@ -9,7 +9,6 @@ export const WaveWrapper = styled.div`
 `;
 
 export const Header = styled.div`
-    height: 35em;
     width: 100%;
     margin: 0;
     display: grid;

@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 
-export const NavbarContainer = styled.nav`
+export const NavbarContainer = styled.nav<{ background?: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1em 10em;
   height: 4em;
-  background-color: #f2f2f250;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 1em;
+  ${({ background }) => background && `
+    background: linear-gradient(60deg, rgba(84,58,183,1) 0%, rgba(0,172,193,1) 100%);;
+  `}
 `;
 
 export const Logo = styled.img`
@@ -30,9 +34,9 @@ export const NavItem = styled.li`
 `;
 
 export const NavLink = styled.a`
-  color: #333;
+  color: #fff;
   text-decoration: none;
   &:hover {
-    color: brown;
+    color: rgb(39 55 159);
   }
 `;
