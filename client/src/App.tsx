@@ -6,16 +6,15 @@ import Main from './pages/Main';
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Tasks from "./pages/Tasks";
-import Navbar from "./components/Navbar";
 
 export default function App() {
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Main />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+        <Route path="/" element={<Main />} />
+        <Route element={<Layout />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Route>
         <Route
           path="/tasks"
@@ -33,9 +32,6 @@ export default function App() {
 function Layout(){
   return (
   <div>
-    <div style={{marginBottom: "1em"}}>
-      <Navbar />
-    </div>
     <Outlet />
   </div>
   );
