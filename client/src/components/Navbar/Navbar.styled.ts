@@ -5,6 +5,8 @@ export const NavbarContainer = styled.nav<{ background?: string }>`
   justify-content: space-between;
   align-items: center;
   padding: 1em 10em;
+  position: sticky;
+  z-index: 10;
   height: 2em;
   font-family: 'Poppins', sans-serif;
   margin-bottom: 1em;

@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import Tasks from "./pages/Tasks";
 import Navbar from "./components/Navbar";
 import Wave from "./components/Wave";
+import Sections from "./pages/Sections";
 
 export default function App() {
   return (
@@ -23,6 +24,14 @@ export default function App() {
           element={
             // <RequireAuth>
               <Tasks />
+            // </RequireAuth>
+          }
+        />
+        <Route
+          path="/sections"
+          element={
+            // <RequireAuth>
+              <Sections />
             // </RequireAuth>
           }
         />
