@@ -5,10 +5,11 @@ import { fakeAuthProvider } from "./auth";
 import Main from './pages/Main';
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Tasks from "./pages/Tasks";
+import Section from "./pages/Section";
 import Navbar from "./components/Navbar";
 import Wave from "./components/Wave";
-import Sections from "./pages/Sections";
+import Project from "./pages/Project";
+import NotFoundPage from "./pages/NotFoundPage";
 
 export default function App() {
   return (
@@ -20,21 +21,22 @@ export default function App() {
           <Route path="register" element={<Register />} />
         </Route>
         <Route
-          path="/tasks"
+          path="/tasks/:projectId/:sectionId"
           element={
             // <RequireAuth>
-              <Tasks />
+              <Section />
             // </RequireAuth>
           }
         />
         <Route
-          path="/sections"
+          path="/tasks/:projectId"
           element={
             // <RequireAuth>
-              <Sections />
+              <Project />
             // </RequireAuth>
           }
         />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </AuthProvider>
   );
