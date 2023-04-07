@@ -20,16 +20,8 @@ export const SideNavbarWrapper = styled.div`
     border-radius: 0.5em;
     }
 
-    & ul:hover,li:hover,a:hover {
+    & a:hover {
         background: #00000010;
         cursor: pointer;
-    }
-
-    & ul {
-        
-    }
-
-    & li {
-
     }
 `;
