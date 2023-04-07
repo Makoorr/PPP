@@ -9,6 +9,7 @@ export class UserController {
     async all(request: Request, response: Response, next: NextFunction) {
         const users = await AppDataSource.manager.find(User, {
             relations: ['projects', 'projects.sections', 'projects.sections.tasks'],
+            select: ['id', 'login', 'name', 'projects']
           });
         return users;
     }
@@ -16,7 +17,11 @@ export class UserController {
     async one(request: Request, response: Response, next: NextFunction) {
         const id = parseInt(request.params.id)
         
-        const user = await AppDataSource.manager.find(User, {where: {id}, relations: ['projects', 'projects.sections', 'projects.sections.tasks']});
+        const user = await AppDataSource.manager.find(User, {
+            where: {id},
+            relations: ['projects', 'projects.sections', 'projects.sections.tasks'],
+            select: ['id', 'login', 'name', 'projects']
+        });
 
         if (!user) {
             return "unregistered user"
