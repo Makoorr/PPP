@@ -7,6 +7,11 @@ export const TaskWrapper = styled.li`
     background: #fff;
     border-color: #000;
     list-style: none;
+    
+    & a {
+        text-decoration: none;
+        color: #000;
+    }
 `;
 
 export const TaskContent = styled.div`
