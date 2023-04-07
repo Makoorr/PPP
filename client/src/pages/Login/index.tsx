@@ -39,7 +39,7 @@ export default function Login (props: LoginProps) {
             <h3>Username: </h3>
             <input name="username" type="text" />
             <h3>Password: </h3>
-            <input name="password" type="password" />
+            <input autoComplete="suggested" name="password" type="password" />
           </div>
           <div className="gridone"><Button type="submit" >Sign in</Button></div>
         </form>
