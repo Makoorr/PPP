@@ -39,8 +39,8 @@ export default function Main({}: MainProps) {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi qui eos a incidunt blanditiis doloribus temporibus neque? Corporis ipsa odit accusantium fugit mollitia porro cupiditate? Deserunt sapiente repudiandae esse aperiam.
         </p>
         <div className="gridwrapper">
-          <div className="gridone"><Button width="auto">Login</Button></div>
-          <div className="gridtwo"><Button width="auto">Register</Button></div>
+          <div className="gridone"><Link to='/login'><Button width="auto">Login</Button></Link></div>
+          <div className="gridtwo"><Link to='/register'><Button width="auto">Register</Button></Link></div>
         </div>
     </>
   );
