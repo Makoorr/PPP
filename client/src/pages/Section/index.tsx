@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../../components/Navbar';
 import AddButton from '../../components/AddButton';
@@ -79,15 +79,15 @@ export default function Section({}: SectionProps) {
          </Navbar>
 
          <SideNavbar>
-            { user ? (
+            { user?.projects ? (
                 <div key={user.id}>
                     {user.projects.map((project) => (
-                    <ul key={project.id}>{project.name}</ul>
+                        <a key={project.id} href={`/sections/${project.id}`}>{project.name}</a>
                     ))}
                 </div>
                 ) : (
                 <div>
-                    <ul>loading...</ul>
+                    <ul>No project found</ul>
                 </div>
             )}
          </SideNavbar>
@@ -96,7 +96,7 @@ export default function Section({}: SectionProps) {
             header= {
                <h3 color="#000" style={{ margin: 0, fontSize: "1.3rem" }}>{
                   section && project ? ( <>
-                     <span style={{ marginRight: "0.5em" }}>{project?.name}</span>
+                     <Link to={`/sections/${project.id}`}><span style={{ marginRight: "0.5em" }}>{project?.name}</span></Link>
                      /
                      <span style={{ marginLeft: "0.5em" }}>{section?.name}</span>
                   </>

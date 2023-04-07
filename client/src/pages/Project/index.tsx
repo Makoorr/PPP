@@ -5,7 +5,7 @@ import AddButton from '../../components/AddButton';
 import SideNavbar from '../../components/SideNavbar';
 import ContentNavbar from '../../components/ContentNavbar';
 import Task from '../../components/Task';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 interface ProjectProps {}
 
@@ -46,21 +46,12 @@ export default function Project({}: ProjectProps) {
             setUser(user[0]);
 
             // Match projectParamId with project id
-            const projectId = user[0].projects.map(
+            const projectId = user[0]?.projects?.map(
                 (project) => project.id).indexOf(parseInt(projectParamId["projectId" as keyof typeof Project])
-                );
+                ) || 0;
             console.log(user[0])
-
-            { (projectId != undefined) ? (
-                setProject(user[0].projects[projectId])
-                ) : (
-                    console.log("No project found.")
-            ); }
-            { (projectId != undefined) ? (
-                setSections(user[0].projects[projectId].sections)
-            ) : (
-                console.log("No sections found.")
-            ); }
+            setProject(user[0].projects[projectId])
+            setSections(user[0].projects[projectId].sections)
         };
         fetchUser();
     }, [userId]);
@@ -77,7 +68,7 @@ export default function Project({}: ProjectProps) {
             { user?.projects ? (
                 <div key={user.id}>
                     {user.projects.map((project) => (
-                        <ul key={project.id}>{project.name}</ul>
+                        <a key={project.id} href={`/sections/${project.id}`}>{project.name}</a>
                     ))}
                 </div>
                 ) : (
@@ -89,9 +80,12 @@ export default function Project({}: ProjectProps) {
 
             <ContentNavbar
             header= {
-            <h1 color="#000">{ 
-                project ? `${project?.name}` : "Project not found!"
-            }</h1>
+                <h3 color="#000" style={{ margin: 0, fontSize: "1.3rem" }}>{
+                    project ? ( <>
+                       <span style={{ marginRight: "0.5em" }}>{project?.name}</span>
+                    </>
+                    ) : "Project not found!"
+                }</h3>
             }>
                 <div>
                     <AddButton svg={<img src="https://img.icons8.com/ios-glyphs/30/null/plus-math.png"/>}>
@@ -100,14 +94,18 @@ export default function Project({}: ProjectProps) {
                     <div>
                     { sections?.length ? (
                         sections.map((section) => (
-                            <Task key={section.id}
-                                name= {section.name}
-                                description= {section.description}
-                            />
+                            <div key={section.id}>
+                                <Link  to={`/tasks/${project?.id}/${section.id}`}>
+                                    <Task
+                                        name= {section.name}
+                                        description= {section.description}
+                                    />
+                                </Link>
+                            </div>
                         ))
                         ) : (
                         <div>
-                            <h2 style={{ margin: "1em" }}>No Sections found.</h2>
+                            <h2 style={{ margin: "0.5em" }}>No sections found.</h2>
                         </div>
                     )}
                     </div>
