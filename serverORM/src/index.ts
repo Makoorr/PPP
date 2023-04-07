@@ -14,6 +14,12 @@ AppDataSource.initialize().then(async () => {
     // parse requests of content-type - application/x-www-form-urlencoded
     app.use(express.urlencoded({ extended: true }));
 
+    // Middleware to set Access-Control-Allow-Origin header for every request
+    app.use((req: Request, res: Response, next: Function) => {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        next();
+    });
+
     // register express routes from defined application routes
     Routes.forEach(route => {
         (app as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
