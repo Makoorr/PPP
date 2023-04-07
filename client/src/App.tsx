@@ -13,7 +13,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 
 export default function App() {
   return (
-    <AuthProvider>
+    // <AuthProvider>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
@@ -29,7 +29,15 @@ export default function App() {
           }
         />
         <Route
-          path="/tasks/:projectId"
+          path="/projects/"
+          element={
+            // <RequireAuth>
+              <Project />
+            // </RequireAuth>
+          }
+        />
+        <Route
+          path="/sections/:projectId"
           element={
             // <RequireAuth>
               <Project />
@@ -38,7 +46,7 @@ export default function App() {
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </AuthProvider>
+    // </AuthProvider>
   );
 }
 
