@@ -2,14 +2,13 @@ import React, { FC } from 'react';
 import { SideNavbarWrapper } from './SideNavbar.styled';
 
 interface SideNavbarProps {
-   id : number;
+   children : React.ReactNode;
 }
 
-const SideNavbar: FC<SideNavbarProps> = ({ id }) => {
-   // get projects from user with his id
-   return ( 
+const SideNavbar: FC<SideNavbarProps> = ({ children }) => {
+   return (
       <SideNavbarWrapper>
-         <li>SideNavbar</li>
+         { children }
       </SideNavbarWrapper>
    );
 }

@@ -10,7 +10,8 @@ export const ContentNavbarHeader = styled.div`
 
 export const ContentNavbarContainer = styled.div`
     background: #00000010;
-    height: 80vh;
+    height: 70vh;
     border-radius: 0.5em;
     padding: 1em;
+    overflow-y: scroll;
 `

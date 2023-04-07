@@ -11,7 +11,7 @@ const ContentNavbar: FC<ContentNavbarProps> = ({ children, header }) => (
    <ContentNavbarHeader>
       {header}
    </ContentNavbarHeader>
-   <hr style={{ marginTop: 0 }}></hr>
+   <hr></hr>
    <ContentNavbarContainer>
       {children}
    </ContentNavbarContainer>

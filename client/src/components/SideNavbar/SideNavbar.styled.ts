@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const SideNavbarWrapper = styled.div`
-    height: 100%;
+    height: -webkit-fill-available;
     width: 20em;
     position: absolute;
     top: 0;
