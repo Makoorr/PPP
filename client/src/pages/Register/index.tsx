@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
 
@@ -8,7 +8,11 @@ interface RegisterProps {}
 export default function Register (props: RegisterProps) {
   let navigate = useNavigate();
   let location = useLocation();
-//   let auth = useAuth();
+  const isAuthenticated = localStorage.getItem('token') !== null;
+
+  if (isAuthenticated)  {
+    return <Navigate to="/projects" />;
+  }
 
   let from = location.state?.from?.pathname || "/";
 

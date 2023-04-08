@@ -6,6 +6,7 @@ import AddButton from '../../components/AddButton';
 import SideNavbar from '../../components/SideNavbar';
 import ContentNavbar from '../../components/ContentNavbar';
 import Task from '../../components/Task';
+import jwt_decode from "jwt-decode";
 
 interface SectionProps {}
 
@@ -39,18 +40,29 @@ interface Task {
    done: boolean;
 }
 
+interface Payload {
+   id: number;
+   username : string;
+}
+
 export default function Section({}: SectionProps) {
    const [user, setUser] = useState<User>();
    const [project, setProject] = useState<Project>();
    const [section, setSection] = useState<Section>();
    const [tasks, setTask] = useState<Task[]>();
-   const userId = 3;
+   // Get user id and token from local storage
+   const token = localStorage.getItem('token') as string;
+   // decode the token to get the payload
+   const payload = jwt_decode(token) as Payload;
+
+   // access data from the payload
+   const userId = payload.id;
    const ParamId = useParams<{ ParamId: string }>() as string;
 
    // Set User and Project and its sections
    useEffect(() => {
       const fetchUser = async () => {
-          const {data: user} = await axios.get<User[]>('http://localhost:5000/user/'+userId);
+          const {data: user} = await axios.get<User[]>('http://localhost:5000/user/'+userId, {headers: { Authorization: `Bearer ${token}` }});
           setUser(user[0]);
 
           // Match ParamId with project id
@@ -72,11 +84,7 @@ export default function Section({}: SectionProps) {
    
    return (
       <div>
-         <Navbar background="True">
-            <li>
-            <a href="/">Home</a>
-            </li>
-         </Navbar>
+         <Navbar background="True" />
 
          <SideNavbar>
             { user?.projects ? (
@@ -108,7 +116,7 @@ export default function Section({}: SectionProps) {
                   Add Task
                </AddButton>
                <div>
-                  { tasks?.length ? (
+                  { tasks ? (
                      tasks.map((task) => (
                            <Task key={task.id}
                               name= {task.name}

@@ -9,28 +9,6 @@ interface MainProps {}
 
 export default function Main({}: MainProps) {
 
-  function AuthStatus() {
-    // let auth = useAuth();
-    // let navigate = useNavigate();
-  
-    // if (!auth.user) {
-    //   return <p>You are not logged in.</p>;
-    // }
-  
-    return (
-      <>
-        {/* Welcome {auth.user}!{" "}
-        <button
-          onClick={() => {
-            auth.signout(() => navigate("/"));
-          }}
-        >
-          Sign out
-        </button> */}
-      </>
-    );
-  }
-
   return (
     <>
         <h1>Task Management APP</h1>

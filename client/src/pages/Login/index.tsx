@@ -1,32 +1,40 @@
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { FormEvent, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
+import axios from 'axios';
 
 interface LoginProps {}
 
 export default function Login (props: LoginProps) {
-  let navigate = useNavigate();
-  let location = useLocation();
-  //   let auth = useAuth();
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const isAuthenticated = localStorage.getItem('token') !== null;
 
-  let from = location.state?.from?.pathname || "/";
+  if (isAuthenticated)  {
+    return <Navigate to="/projects" />;
+  }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit (event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:5000/auth',{login, password}, {
+        auth : { username: login, password: password },
+        headers: {"Access-Control-Allow-Headers": "Content-Type, Authorization", 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
+      });
 
-    let formData = new FormData(event.currentTarget);
-    let username = formData.get("username") as string;
+      // If authentication is successful, the backend should return a JWT token
+      const token = response.data.token;
 
-    //  auth.signin(username, () => {
-    //    // Send them back to the page they tried to visit when they were
-    //    // redirected to the login page. Use { replace: true } so we don't create
-    //    // another entry in the history stack for the login page.  This means that
-    //    // when they get to the protected page and click the back button, they
-    //    // won't end up back on the login page, which is also really nice for the
-    //    // user experience.
-    //    navigate(from, { replace: true });
-    //  });
+      // Set the token in localStorage to persist it across pages
+      localStorage.setItem('token', token);
+
+      // Redirect the user to the homepage
+      location.href = '/projects';
+    } catch (error) {
+      // Handle errors
+      console.log(error);
+    }
   }
 
   return (
@@ -34,12 +42,12 @@ export default function Login (props: LoginProps) {
       <div style={ { textAlign : 'center' } }>
         <h1 style={ { margin: '1em' } }>Login</h1>
 
-        <form onSubmit={handleSubmit}>
+        <form method= "POST" onSubmit={handleSubmit}>
           <div className="form">
-            <h3>Username: </h3>
-            <input name="username" type="text" />
+            <h3>Login: </h3>
+            <input name="login" type="text" onChange={(event) => setLogin(event.target.value)} />
             <h3>Password: </h3>
-            <input autoComplete="suggested" name="password" type="password" />
+            <input autoComplete="suggested" name="password" type="password" onChange={(event) => setPassword(event.target.value)} />
           </div>
           <div className="gridone"><Button type="submit" >Sign in</Button></div>
         </form>
