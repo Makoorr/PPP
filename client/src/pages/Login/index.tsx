@@ -20,7 +20,7 @@ export default function Login (props: LoginProps) {
     try {
       const response = await axios.post('/auth',{login, password}, {
         auth : { username: login, password: password },
-        headers: {"Access-Control-Allow-Headers": "Content-Type, Authorization", 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
+        headers: {'Access-Control-Allow-Headers': 'Content-Type, Authorization', 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
       });
 
       // If authentication is successful, the backend should return a JWT token

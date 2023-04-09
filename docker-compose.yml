@@ -15,7 +15,7 @@ services:
       MYSQL_DATABASE: ppp
       MYSQL_USER: user
       MYSQL_PASSWORD: passworduser
-      MYSQL_ROOT_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: passwordroot
       
   app:
     depends_on:
@@ -25,7 +25,21 @@ services:
       dockerfile: Dockerfile
     command: bash -c 'while !</dev/tcp/mysqldb/3306; do sleep 1; done; npm start'
     ports:
-      - 5000:5000
+      - "5000"
+    networks:
+      - app-tier
+    volumes:
+      - .:/app
+      - '/app/node_modules'
+
+  client:
+    depends_on:
+      - app
+    build: 
+      context: ./client/
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
     networks:
       - app-tier
     volumes:
