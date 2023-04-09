@@ -6,15 +6,14 @@ import { Task } from "./entity/Task"
 import { User } from "./entity/User"
 import 'dotenv/config'
 
-// use dotEnv to get the environment variables
 export const AppDataSource = new DataSource({
     type: "mysql",
     host: process.env.DB_HOST,
-    port: 3306,
+    port: parseInt(process.env.DB_PORT),
     username: process.env.DB_USER,
-    password: process.env.DB_PASS,
+    password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    synchronize: false, // true,
+    synchronize: true,
     logging: true,
     entities: [User, Project, Section, Task],
     subscribers: [],
