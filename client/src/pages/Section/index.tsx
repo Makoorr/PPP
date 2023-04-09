@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axiosConfig';
 import Navbar from '../../components/Navbar';
 import AddButton from '../../components/AddButton';
 import SideNavbar from '../../components/SideNavbar';
@@ -62,7 +62,7 @@ export default function Section({}: SectionProps) {
    // Set User and Project and its sections
    useEffect(() => {
       const fetchUser = async () => {
-          const {data: user} = await axios.get<User[]>('http://localhost:5000/user/'+userId, {headers: { Authorization: `Bearer ${token}` }});
+          const {data: user} = await axios.get<User[]>('/user/'+userId);
           setUser(user[0]);
 
           // Match ParamId with project id

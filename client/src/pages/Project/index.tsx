@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios, { AxiosResponse } from 'axios';
+import axios from '../../axiosConfig';
 import Navbar from '../../components/Navbar';
 import AddButton from '../../components/AddButton';
 import SideNavbar from '../../components/SideNavbar';
@@ -55,7 +55,7 @@ export default function Project({}: ProjectProps) {
     // Set User and Project and its sections
     useEffect(() => {
         const fetchUser = async () => {
-            const {data: user} = await axios.get<User[]>('http://localhost:5000/user/'+userId, {headers: { Authorization: `Bearer ${token}` }});
+            const {data: user} = await axios.get<User[]>('/user/'+userId);
             setUser(user[0]);
 
             // Match projectParamId with project id
@@ -69,12 +69,13 @@ export default function Project({}: ProjectProps) {
         fetchUser();
     }, [userId]);
 
+    sections ? console.log(sections) : console.log("No sections found");
     return (
         <>
             <Navbar background="True" />
 
             <SideNavbar>
-            { user?.projects ? (
+            { user?.projects.length ? (
                 <div key={user.id}>
                     {user.projects.map((project) => (
                         <a key={project.id} href={`/sections/${project.id}`}>{project.name}</a>
@@ -101,7 +102,7 @@ export default function Project({}: ProjectProps) {
                         Add Section
                     </AddButton>
                     <div>
-                    { (sections) ? (
+                    { (sections?.length) ? (
                         sections.map((section) => (
                             <div key={section.id}>
                                 <Link  to={`/tasks/${project?.id}/${section.id}`}>

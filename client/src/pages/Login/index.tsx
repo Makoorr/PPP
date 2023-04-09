@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
-import axios from 'axios';
+import axios from '../../axiosConfig';
 
 interface LoginProps {}
 
@@ -18,7 +18,7 @@ export default function Login (props: LoginProps) {
   async function handleSubmit (event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/auth',{login, password}, {
+      const response = await axios.post('/auth',{login, password}, {
         auth : { username: login, password: password },
         headers: {"Access-Control-Allow-Headers": "Content-Type, Authorization", 'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'}
       });
