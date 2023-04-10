@@ -6,7 +6,7 @@ import * as jwt from 'jsonwebtoken'
 import { User } from "./entity/User"
 require('dotenv').config()
 
-AppDataSource.initialize().then(async () => {
+AppDataSource.initialize().then(async (connection) => {
 
     // create express app
     const app = express()
@@ -16,6 +16,9 @@ AppDataSource.initialize().then(async () => {
 
     // parse requests of content-type - application/x-www-form-urlencoded
     app.use(express.urlencoded({ extended: true }));
+
+    await connection.synchronize();
+    await connection.runMigrations();
 
     // Middleware to set Access-Control-Allow-Origin header for every request
     app.use((req: Request, res: Response, next: Function) => {
@@ -76,7 +79,7 @@ AppDataSource.initialize().then(async () => {
         });
 
         if (!user) {
-            return res.status(401).send('Unauthorized')
+            return res.status(401).send('User not Found.')
         }
 
         if (login === user.login  && password === user.password) {

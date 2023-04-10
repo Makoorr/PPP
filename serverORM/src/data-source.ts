@@ -5,6 +5,7 @@ import { Section } from "./entity/Section"
 import { Task } from "./entity/Task"
 import { User } from "./entity/User"
 import 'dotenv/config'
+import { FakeData1680044213857 } from "./migrations/1680044213857-FakeData"
 
 export const AppDataSource = new DataSource({
     type: "mysql",
@@ -13,9 +14,8 @@ export const AppDataSource = new DataSource({
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    synchronize: true,
     logging: true,
     entities: [User, Project, Section, Task],
-    subscribers: [],
-    migrations: [],
+    migrations: [FakeData1680044213857],
+    synchronize: true,
 })
