@@ -1,10 +1,18 @@
-.git
+./.git
 
-/serverORM/node_modules
-/client/node_modules
+./.gitignore
+./fakedata.txt
+./PPP.EAP
+./schem.png
+./Sujet_PDF.pdf
+./t.txt
 
-PPP.EAP
-schem.png
-t.txt
-Sujet_PDF.pdf
-fakedata.txt
+./serverORM/.gitignore
+./serverORM/README.md
+
+dbDump20230305
+
+./client/.gitignore
+./client/README.md
+./client/package-lock.json
+./client/generate-react-cli.json
