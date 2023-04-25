@@ -1,11 +1,7 @@
 ./.git
 
 ./.gitignore
-./fakedata.txt
-./PPP.EAP
-./schem.png
-./Sujet_PDF.pdf
-./t.txt
+./temp/
 
 ./serverORM/.gitignore
 ./serverORM/README.md

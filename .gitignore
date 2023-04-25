@@ -1,6 +1,4 @@
-t.txt
-fakedata.txt
-PPP.EAP
+./temp
 
 # dependencies
 /server/node_modules

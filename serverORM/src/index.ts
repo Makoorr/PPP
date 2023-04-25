@@ -37,7 +37,6 @@ AppDataSource.initialize().then(async (connection) => {
     // authentication middleware:
     function authentify(req: RequestWithUser, res: Response, next: Function) {
         // 1. get token from headers
-        // be aware, ynjm mybn3thch, or ynjm format 4alta
         // token format: "Bearer <token>"
         const authorization = req.headers['authorization']
 

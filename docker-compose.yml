@@ -5,25 +5,25 @@ networks:
     driver: bridge
 
 services:
-  mysqldb:
-    image: mysql:5.7
-    expose:
-      - "3306"
-    networks:
-    - app-tier  
-    environment:
-      MYSQL_DATABASE: ppp
-      MYSQL_USER: user
-      MYSQL_PASSWORD: passworduser
-      MYSQL_ROOT_PASSWORD: passwordroot
+  # mysqldb:
+  #   image: mysql:5.7
+  #   expose:
+  #     - "3306"
+  #   networks:
+  #   - app-tier  
+  #   environment:
+  #     MYSQL_DATABASE: ppp
+  #     MYSQL_USER: user
+  #     MYSQL_PASSWORD: passworduser
+  #     MYSQL_ROOT_PASSWORD: passwordroot
       
   app:
-    depends_on:
-      - mysqldb
+    # depends_on:
+    #   - mysqldb
     build: 
       context: ./serverORM/
       dockerfile: Dockerfile
-    command: bash -c 'while !</dev/tcp/mysqldb/3306; do sleep 1; done; npm start'
+    # command: bash -c 'while !</dev/tcp/mysqldb/3306; do sleep 1; done; npm start'
     ports:
       - "5000"
     networks:
