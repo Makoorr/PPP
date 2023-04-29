@@ -1,0 +1,30 @@
+pipeline {
+  agent any
+  stages {
+
+    stage('Pull The Code') {
+      steps {
+        checkout([$class: 'GitSCM', branches: [[name: '*/main']], 
+                  userRemoteConfigs: [[url: 'https://github.com/IR0NBYTE/PPP']]])
+      }
+    }
+
+    stage('Building Images') {
+      steps { 
+        sh 'docker-compose build'
+      }
+    }
+
+    stage('Pushing Images') {
+      steps {
+        // Login to Azure Register Container
+        withCredentials([string(credentialsId: 'pass', variable: 'AZURE_CRED')]) {
+            sh 'docker login ironbyte.azurecr.io --username ironbyte --password $AZURE_CRED'
+        }
+
+        sh 'docker-compose push'
+      }
+    }
+
+  }
+}
