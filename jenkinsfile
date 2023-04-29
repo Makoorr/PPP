@@ -24,7 +24,7 @@ pipeline {
             sh 'docker login ironbyte.azurecr.io --username ironbyte --password $AZURE_CRED'
         }
         sh 'docker-compose push'
-        sh 'docker-compose up --build'
+        sh 'docker-compose up -d'   
       }
     }
 
