@@ -5,7 +5,7 @@ networks:
 
 services:
   app:
-    image: ironbyte.azurecr.io/serverORM
+    image: ironbyte.azurecr.io/server
     build: 
       context: ./serverORM/
       dockerfile: Dockerfile
