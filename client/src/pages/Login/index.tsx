@@ -11,7 +11,7 @@ export default function Login (props: LoginProps) {
   const [password, setPassword] = useState("");
   const isAuthenticated = localStorage.getItem('token') !== null;
 
-  if (!isAuthenticated)  {
+  if (isAuthenticated)  {
     return <Navigate to="/projects" />;
   }
 
