@@ -11,7 +11,7 @@ export default function Main({}: MainProps) {
 
   return (
     <>
-        <h1>Task Management APP TEst</h1>
+        <h1>Task Management APP TEST2</h1>
         <h2>DevOps PPP Project</h2>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi qui eos a incidunt blanditiis doloribus temporibus neque? Corporis ipsa odit accusantium fugit mollitia porro cupiditate? Deserunt sapiente repudiandae esse aperiam.
