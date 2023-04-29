@@ -24,7 +24,7 @@ pipeline {
         }
 
         sh 'docker-compose push'
-        sh 'docker-compose up'
+        sh 'docker-compose up -d'
       }
     }
 
