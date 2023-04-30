@@ -108,6 +108,27 @@ AppDataSource.initialize().then(async (connection) => {
         }
     })
 
+    app.post("/auth/register", async (req, res) => {
+        const { login, password, name } = req.body;
+  
+        const user = await AppDataSource.manager.findOne(User, {
+          where: { login },
+        });
+  
+        if (user) {
+          return res.status(401).send("User already exists.");
+        }
+  
+        const newUser = new User();
+        newUser.login = login;
+        newUser.password = password;
+        newUser.name = name;
+  
+        await AppDataSource.manager.save(newUser);
+  
+        return res.send({ message: "User created." });
+    });
+
     // register express routes from defined application routes
     Routes.forEach(route => {
         (app as any)[route.method](route.route, authentify, (req: Request, res: Response, next: Function) => {
