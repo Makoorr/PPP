@@ -15,8 +15,6 @@ export default function Register (props: RegisterProps) {
     return <Navigate to="/projects" />;
   }
 
-  let from = location.state?.from?.pathname || "/";
-
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
