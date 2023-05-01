@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
 import axios from '../../axiosConfig';
@@ -8,7 +8,6 @@ interface RegisterProps {}
 
 export default function Register (props: RegisterProps) {
   let navigate = useNavigate();
-  let location = useLocation();
   const isAuthenticated = localStorage.getItem('token') !== null;
 
   if (isAuthenticated)  {
@@ -45,13 +44,13 @@ export default function Register (props: RegisterProps) {
         <form onSubmit={handleSubmit}>
           <div className="form">
             <h3>Login: </h3>
-            <input name="login" type="text" />
+            <input data-testid="login" name="login" type="text" />
             <h3>Username: </h3>
-            <input name="username" type="text" />
+            <input data-testid="username" name="username" type="text" />
             <h3>Password: </h3>
-            <input autoComplete="suggested" name="password" type="password" />
+            <input data-testid="password" autoComplete="suggested" name="password" type="password" />
           </div>
-          <div className="gridone"><Button type="submit" >Sign up</Button></div>
+          <div className="gridone"><Button data-testid="submit" type="submit" >Sign up</Button></div>
         </form>
       </div>
     </Card>
