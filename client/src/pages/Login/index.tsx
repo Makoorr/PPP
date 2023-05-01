@@ -33,7 +33,7 @@ export default function Login (props: LoginProps) {
       location.href = '/projects';
     } catch (error) {
       // Handle errors
-      console.log(error);
+      alert(error);
     }
   }
 
