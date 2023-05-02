@@ -15,8 +15,7 @@ pipeline {
         sh 'docker-compose build'
       }
     }
-//azzaeaze
-//azeeaz
+    // TESTING
     stage('Pushing Images') {
       steps {
         // Login to Azure Register Container
