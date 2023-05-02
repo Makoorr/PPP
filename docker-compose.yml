@@ -6,6 +6,7 @@ networks:
 services:
   app:
     image: ironbyte.azurecr.io/server
+    container_name: Management_APP_Server
     build: 
       context: ./serverORM/
       dockerfile: Dockerfile
@@ -16,6 +17,7 @@ services:
 
   client:
     image: ironbyte.azurecr.io/client
+    container_name: Management_APP_Client
     depends_on:
       - app
     build: 
