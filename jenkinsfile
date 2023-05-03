@@ -26,7 +26,7 @@ pipeline {
         sh 'if grep -q "<vulnerability severity=\"critical" dependency-check-report.xml; then exit 1; fi'
       }
     }
-
+  //azeae
     stage('Building Images') {
       steps { 
         sh 'docker-compose down'
