@@ -19,6 +19,7 @@ pipeline {
     }
     stage('Security Testing') {
       steps {
+        sh 'npm install -g dependency-check'
         // Run OWASP Dependency-Check
         sh 'dependency-check --project "My App" --out . --scan .'
         
