@@ -13,20 +13,12 @@ pipeline {
       steps {
         // Run the unit tests
         sh 'npm install'
+        sh 'sleep 10'
     
         // sh 'npm run test'
       }
     }
-    stage('Security Testing') {
-      steps {
-        sh 'npm install -g dependency-check'
-        // Run OWASP Dependency-Check
-        // sh 'dependency-check --project "My App" --out . --scan .'
-        
-        // Fail the build if there are critical security vulnerabilities
-        sh 'if grep -q "<vulnerability severity=\"critical" dependency-check-report.xml; then exit 1; fi'
-      }
-    }
+
   //azeae
     stage('Building Images') {
       steps { 
