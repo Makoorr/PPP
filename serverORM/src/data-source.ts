@@ -14,9 +14,9 @@ export const AppDataSource = new DataSource({
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    ssl : {
-        rejectUnauthorized: false
-    },
+    // ssl : {
+    //     rejectUnauthorized: false
+    // }, // for azure
     logging: true,
     entities: [User, Project, Section, Task],
     migrations: [FakeData1680044213857],
