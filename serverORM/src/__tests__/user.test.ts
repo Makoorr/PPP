@@ -20,7 +20,6 @@ const userInput = {
 describe('User', () => {
     describe('register User', () => {
         describe('given Valid login and password', () => {
-            describe('Authentication', () => {
                 let token: string;
               
                 it('should authenticate a user and return a token', async () => {
@@ -42,10 +41,8 @@ describe('User', () => {
                   expect(response.body).toEqual({"message": "User created."});
                   expect(saveMock).toHaveBeenCalledWith(userInput);
 
-                  token = response.body.token; // Store the token for future requests
+                  console.log(token)
                 });
-            })
-
         })
         
     })
