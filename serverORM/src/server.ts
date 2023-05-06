@@ -3,10 +3,10 @@ import { Request, Response } from "express"
 import { Routes } from "./routes"
 import * as jwt from 'jsonwebtoken'
 import { User } from "./entity/User"
-
+import { AppDataSource } from "./data-source"
 require('dotenv').config()
 
-function createServer(AppDataSource, connection){
+function createServer(){
     // create express app
     const app = express()
 
@@ -108,11 +108,11 @@ function createServer(AppDataSource, connection){
         const { login, password, name } = req.body;
 
         const user = await AppDataSource.manager.findOne(User, {
-        where: { login },
+            where: { login },
         });
 
         if (user) {
-        return res.status(401).send("User already exists.");
+            return res.status(401).send("User already exists.");
         }
 
         const newUser = new User();

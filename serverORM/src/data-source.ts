@@ -5,7 +5,6 @@ import { Section } from "./entity/Section"
 import { Task } from "./entity/Task"
 import { User } from "./entity/User"
 import 'dotenv/config'
-import { FakeData1680044213857 } from "./migrations/1680044213857-FakeData"
 
 export const AppDataSource = new DataSource({
     type: "mysql",
@@ -20,5 +19,4 @@ export const AppDataSource = new DataSource({
     // ssl : {
         //     rejectUnauthorized: false
     // }, // for azure
-    // migrations: [FakeData1680044213857],
 })
