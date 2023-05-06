@@ -78,8 +78,6 @@ function createServer(){
         }
 
         if (login === user.login  && password === user.password) {
-            // na5la9 token
-
             // Generate token payload
             const payload = {
                 id: user.id,

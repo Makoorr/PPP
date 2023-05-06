@@ -11,6 +11,6 @@
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "sourceMap": true,
-      // "allowSyntheticDefaultImports": true // This is for import supertest from 'supertest'
+      "allowSyntheticDefaultImports": true // This is for import supertest from 'supertest'
    }
 }
