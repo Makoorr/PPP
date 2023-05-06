@@ -1,4 +1,4 @@
-./temp
+/temp/
 
 # dependencies
 /server/node_modules
