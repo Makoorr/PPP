@@ -1,37 +1,42 @@
 import createServer from '../server';
 import { AppDataSource } from '../data-source'
+import { Any, DataSource } from "typeorm";
 import * as supertest from 'supertest'
+import { UserController } from '../controller/UserController';
+import { User } from '../entity/User';
 
 const app = createServer();
 
-const userPayload = { // user payload to check with
-    login: 'jane.doe',
-    password: 'password'
-}
 
-const userInput = { // valid user
-    login: "jane.doe",
-    password: "password",
-    name: "Jane Doe",
-};
+// Creating variables for future use cases
+  const userPayload = { // user payload to check with
+      login: 'jane.doe',
+      password: 'password'
+  }
 
-const userInputs = [ // valid users
-  userInput,
-  { login: "jane.doe", password: "password", name: "Jane Doe" },
-  { login: "john.doe", password: "password", name: "John Doe" },
-];
+  const userInput = { // valid user
+      login: "jane.doe",
+      password: "password",
+      name: "Jane Doe",
+  };
 
-const wrongPasswordInput = { // wrong password
-    login: "jane.doe",
-    password: "wrongpassword",
-};
+  const userInputs = [ // valid users
+    userInput,
+    { login: "jane.doe", password: "password", name: "Jane Doe" },
+    { login: "john.doe", password: "password", name: "John Doe" },
+  ];
 
-const wrongLoginInput = { // wrong login
-    login: "janedoe",
-    password: "password",
-};
+  const wrongPasswordInput = { // wrong password
+      login: "jane.doe",
+      password: "wrongpassword",
+  };
 
-let token: string; // token to be used in tests
+  const wrongLoginInput = { // wrong login
+      login: "janedoe",
+      password: "password",
+  };
+
+  let token: string; // token to be used in tests
 
 afterEach(() => { // clear mocks after each test
   jest.clearAllMocks();
@@ -154,12 +159,8 @@ describe('Authenticated Routes', () => {
 
     const findOneMock = jest
     .spyOn(AppDataSource.manager, 'find');
-    
-    // const saveMock = jest
-    // .spyOn(userRepositoryMock, 'save');
 
-    // const deleteMock = jest
-    // .spyOn(userRepositoryMock, 'remove');
+    const mockNext = jest.fn();
 
     beforeAll(async () => {
       findMock.mockImplementation(() => Promise.resolve(userInputs));
@@ -169,8 +170,6 @@ describe('Authenticated Routes', () => {
     let id = 1;
 
     describe('given valid token', () => {
-      
-
       describe('get all users', () => {
         it('should return users', async () => {
           const response = await supertest(app)
@@ -195,46 +194,162 @@ describe('Authenticated Routes', () => {
           expect(findOneMock).toHaveBeenCalled();
         });
       });
+      
+      describe("save user", () => {
+          const mockRequest = (body) => {
+            return {
+                body
+            };
+          };
+          
+          const mockResponse = () => {
+              let res = {"status": undefined, "json": undefined};
+              res.status = jest.fn().mockReturnValue(res);
+              res.json = jest.fn().mockReturnValue(res);
+              return res;
+          };
+          let userRepository;
+      
+          beforeEach(() => {
+              userRepository = { save: jest.fn() };
+              AppDataSource.getRepository = jest.fn().mockReturnValue(userRepository);
+          });
+      
+          test("should call userRepository.save with correct arguments", async () => {
+              const req = mockRequest(userInput);
+              const res = mockResponse();
+      
+              const controller = new UserController();
+              await controller.save(req, res, mockNext);
 
-      // describe('post user', () => {
-      //   it('should create a user', async () => {
-      //     const response = await supertest(app)
-      //     .post('/user')
-      //     .set('Authorization', `Bearer ${token}`)
-      //     .send(userInput);
+              expect(userRepository.save).toHaveBeenCalledWith(userInput);
+          });
+      });
 
-      //     expect(response.status).toBe(200);
-      //     expect(userRepositoryMock).toHaveBeenCalled();
-      //     expect(userRepositoryMock).toHaveBeenCalledWith(expect.objectContaining({userInput}));
-      //   });
-      // });
+      describe("update user", () => {
+        const mockRequest = (params, body) => {
+          return {
+              params,
+              body
+          };
+        };
+        
+        const mockResponse = () => {
+            let res = {"status": undefined, "json": undefined};
+            res.status = jest.fn().mockReturnValue(res);
+            res.json = jest.fn().mockReturnValue(res);
+            return res;
+        };
+        let userRepository;
+      
+        beforeEach(() => {
+            userRepository = { 
+                save: jest.fn(),
+                findOneBy: jest.fn()
+            };
+            AppDataSource.getRepository = jest.fn().mockReturnValue(userRepository);
+        });
+    
+        test("should update the user and return a success message", async () => {
+            const req = mockRequest({ id: "1" }, { login: "newUser", password: "newPassword", name: "newName" });
+            const res = mockResponse();
+    
+            const user = { id: 1, login: "oldUser", password: "oldPassword", name: "oldName" };
+            userRepository.findOneBy.mockResolvedValue(user);
+    
+            const controller = new UserController();
+            const result = await controller.update(req, res, mockNext);
+    
+            expect(userRepository.findOneBy).toHaveBeenCalledWith({ id: 1 });
+            expect(userRepository.save).toHaveBeenCalledWith({
+                id: 1,
+                login: "newUser",
+                password: "newPassword",
+                name: "newName"
+            });
+            expect(result).toBe("User 1 has been updated. login: newUser | name: newName | password: newPassword");
+        });
+    
+        test("should return 'User not found' if the user does not exist", async () => {
+            const req = mockRequest({ id: "1" }, {});
+            const res = mockResponse();
+    
+            userRepository.findOneBy.mockResolvedValue(undefined);
+    
+            const controller = new UserController();
+            const result = await controller.update(req, res, mockNext);
+    
+            expect(userRepository.findOneBy).toHaveBeenCalledWith({ id: 1 });
+            expect(result).toBe("User not found");
+        });
+    
+        test("should return 'Error: message' when an error is thrown", async () => {
+            const req = mockRequest({ id: "1" }, {});
+            const res = mockResponse();
+    
+            userRepository.findOneBy.mockRejectedValue(new Error('Test error'));
+    
+            const controller = new UserController();
+            const result = await controller.update(req, res, mockNext);
+    
+            expect(userRepository.findOneBy).toHaveBeenCalledWith({ id: 1 });
+            expect(result).toBe("Error: Test error");
+        });
+      });
+   
+      describe("remove user", () => {
+        const mockRequest = (params, body) => {
+          return {
+              params,
+              body
+            };
+        };
 
-      // describe('update user', () => {
-      //   it('should update a user', async () => {
-      //     const response = await supertest(app)
-      //     .put(`/user/${id}`)
-      //     .set('Authorization', `Bearer ${token}`)
-      //     .send(userInput);
+        const mockResponse = () => {
+            let res = {"status": undefined, "json": undefined};
+            res.status = jest.fn().mockReturnValue(res);
+            res.json = jest.fn().mockReturnValue(res);
+            return res;
+        };
 
-      //     expect(response.status).toBe(200);
-      //     expect(saveMock).toHaveBeenCalledTimes(1);
-      //     expect(saveMock).toHaveBeenCalledWith(
-      //       expect.objectContaining(userInput));
-      //   });
-      // });
-
-      // describe('delete user', () => {
-      //   it('should delete a user', async () => {
-      //     const response = await supertest(app)
-      //     .delete(`/user/${id}`)
-      //     .set('Authorization', `Bearer ${token}`);
-
-      //     expect(response.status).toBe(200);
-      //     expect(response.body).toEqual({"message": "User deleted."});
-      //     expect(deleteMock).toHaveBeenCalled();
-      //   });
-      // });
-
+        let userRepository;
+    
+        beforeEach(() => {
+            userRepository = { 
+                remove: jest.fn(),
+                findOneBy: jest.fn()
+            };
+            AppDataSource.getRepository = jest.fn().mockReturnValue(userRepository);
+        });
+    
+        test("should remove the user and return a success message", async () => {
+            const req = mockRequest({ id: "1" }, {});
+            const res = mockResponse();
+    
+            const user = { id: 1, userInput };
+            userRepository.findOneBy.mockResolvedValue(user);
+    
+            const controller = new UserController();
+            const result = await controller.remove(req, res, mockNext);
+    
+            expect(userRepository.findOneBy).toHaveBeenCalledWith({ id: 1 });
+            expect(userRepository.remove).toHaveBeenCalledWith(user);
+            expect(result).toBe("User 1 has been removed");
+        });
+    
+        test("should return 'this user not exist' if the user does not exist", async () => {
+            const req = mockRequest({ id: "1" }, {});
+            const res = mockResponse();
+    
+            userRepository.findOneBy.mockResolvedValue(undefined);
+    
+            const controller = new UserController();
+            const result = await controller.remove(req, res, mockNext);
+    
+            expect(userRepository.findOneBy).toHaveBeenCalledWith({ id: 1 });
+            expect(result).toBe("this user not exist");
+        });
+      });
     });
 
     describe('given invalid token', () => {
