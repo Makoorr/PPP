@@ -25,6 +25,6 @@
    "scripts": {
       "start": "ts-node src/index.ts",
       "typeorm": "typeorm-ts-node-commonjs",
-      "test": "jest"
+      "test": "jest --detectOpenHandles"
    }
 }

@@ -38,10 +38,6 @@ const app = createServer();
 
   let token: string; // token to be used in tests
 
-afterEach(() => { // clear mocks after each test
-  jest.clearAllMocks();
-});
-
 describe('Register User', () => {
     describe('given Valid login and password', () => {        
       it('should authenticate a user and return a token', async () => {
@@ -215,7 +211,7 @@ describe('Authenticated Routes', () => {
               AppDataSource.getRepository = jest.fn().mockReturnValue(userRepository);
           });
       
-          test("should call userRepository.save with correct arguments", async () => {
+          test("should save user", async () => {
               const req = mockRequest(userInput);
               const res = mockResponse();
       

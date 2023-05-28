@@ -86,6 +86,7 @@ function createServer(){
             };
 
             const secret = process.env.JWT_SECRET || 'secret'
+            console.log(secret)
 
             // 2. generate token
             const token = jwt.sign(payload, secret, {
