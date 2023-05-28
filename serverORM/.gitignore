@@ -5,3 +5,5 @@ build/
 tmp/
 temp/
 src/migrations/
+.nyc_output/
+coverage/

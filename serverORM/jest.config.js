@@ -6,4 +6,7 @@ module.exports = {
   verbose: true,
   forceExit: true,
   clearMocks: true,
+  collectCoverage: true,
+  collectCoverageFrom: ['src/**/*.ts'],
+  coverageReporters: ['lcov', 'text']
 };
