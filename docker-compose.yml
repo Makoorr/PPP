@@ -1,38 +1,23 @@
 version: "3.8"
-
 networks:
   app-tier:
     driver: bridge
 
 services:
-  mysqldb:
-    image: mysql:5.7
-    expose:
-      - "3306"
-    networks:
-    - app-tier  
-    environment:
-      MYSQL_DATABASE: ppp
-      MYSQL_USER: user
-      MYSQL_PASSWORD: passworduser
-      MYSQL_ROOT_PASSWORD: passwordroot
-      
   app:
-    depends_on:
-      - mysqldb
+    image: ironbyte.azurecr.io/server
+    container_name: Management_APP_Server
     build: 
       context: ./serverORM/
       dockerfile: Dockerfile
-    command: bash -c 'while !</dev/tcp/mysqldb/3306; do sleep 1; done; npm start'
     ports:
-      - "5000"
+      - 5000
     networks:
       - app-tier
-    volumes:
-      - .:/app
-      - '/app/node_modules'
 
   client:
+    image: ironbyte.azurecr.io/client
+    container_name: Management_APP_Client
     depends_on:
       - app
     build: 
@@ -42,6 +27,3 @@ services:
       - 80:80
     networks:
       - app-tier
-    volumes:
-      - .:/app
-      - '/app/node_modules'

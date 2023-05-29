@@ -1,0 +1,42 @@
+pipeline {
+  agent any
+  stages {
+
+    stage('Pull The Code') {
+      steps {
+        checkout([$class: 'GitSCM', branches: [[name: '*/main']], 
+                  userRemoteConfigs: [[url: 'https://github.com/IR0NBYTE/PPP']]])
+      }
+    }
+
+    stage('Running Test Unites') {
+      steps {
+        // Run the unit tests
+        sh 'npm install'
+        sh 'sleep 10'
+    
+        // sh 'npm run test'
+      }
+    }
+
+  //azeae
+    stage('Building Images') {
+      steps { 
+        sh 'docker-compose down'
+        sh 'docker-compose build'
+      }
+    }
+    // TESTING
+    stage('Deploying Website') {
+      steps {
+        // // Login to Azure Register Container
+        // withCredentials([string(credentialsId: 'pass', variable: 'AZURE_CRED')]) {
+        //     sh 'docker login ironbyte.azurecr.io --username ironbyte --password $AZURE_CRED'
+        // }
+        // sh 'docker-compose push'
+        sh 'docker-compose up -d'   
+      }
+    }
+    //aze
+  }
+}

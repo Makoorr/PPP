@@ -1,4 +1,7 @@
-/temp/
+temp/
+dbDump20230305/
+schem.png
+Sujet_PPP.pdf
 
 # dependencies
 /server/node_modules
