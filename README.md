@@ -1,6 +1,7 @@
 # Implementing Azure DevOps Solution
 Task Management App created with ReactTS - ExpressTS with TypeORM<br />
 We used Docker for image building, Nginx as a lightweight HTTP Server and as a loadbalancer.<br />
+
 ![Landpage](https://github.com/Makoorr/PPP/assets/99105286/a897cd5f-a696-4516-bf3c-51184f665715)
 
 # Pipeline Overview
