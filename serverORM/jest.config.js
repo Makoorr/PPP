@@ -7,6 +7,10 @@ module.exports = {
   forceExit: true,
   clearMocks: true,
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.ts'],
+  collectCoverageFrom: ['src/controller/*.ts','src/*.ts'],
+  // ignore directory in coverage
+  coveragePathIgnorePatterns: [
+    'src/index.ts',
+  ],
   coverageReporters: ['lcov', 'text']
 };
