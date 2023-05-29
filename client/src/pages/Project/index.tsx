@@ -97,7 +97,7 @@ export default function Project({}: ProjectProps) {
                     ) : "Project not found!"
                 }</h3>
             }>
-                <div>
+                <div data-testid="project" >
                     <AddButton svg={<img src="https://img.icons8.com/ios-glyphs/30/null/plus-math.png"/>}>
                         Add Section
                     </AddButton>

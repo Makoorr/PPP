@@ -41,7 +41,7 @@ export default function Register (props: RegisterProps) {
       <div style={ { textAlign : 'center' } }>
         <h1 style={ { margin: '1em' } }>Registration</h1>
 
-        <form onSubmit={handleSubmit}>
+        <form data-testid="registration" onSubmit={handleSubmit}>
           <div className="form">
             <h3>Login: </h3>
             <input data-testid="login" name="login" type="text" />
@@ -50,7 +50,7 @@ export default function Register (props: RegisterProps) {
             <h3>Password: </h3>
             <input data-testid="password" autoComplete="suggested" name="password" type="password" />
           </div>
-          <div className="gridone"><Button data-testid="submit" type="submit" >Sign up</Button></div>
+          <div className="gridone"><Button type="submit">Sign up</Button></div>
         </form>
       </div>
     </Card>
