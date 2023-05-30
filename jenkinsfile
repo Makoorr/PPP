@@ -1,7 +1,6 @@
 pipeline {
   agent any
   stages {
-
     stage('Pull The Code') {
       steps {
         checkout([$class: 'GitSCM', branches: [[name: '*/main']], 
@@ -28,6 +27,5 @@ pipeline {
         sh 'docker-compose up -d'   
       }
     }
-    //aze
   }
 }
